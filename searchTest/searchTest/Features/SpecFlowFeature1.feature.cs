@@ -75,11 +75,11 @@ namespace searchTest.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search for  content related to the word card in a  1200 x 754 px")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
+        [NUnit.Framework.CategoryAttribute("search")]
         public virtual void SearchForContentRelatedToTheWordCardInA1200X754Px()
         {
             string[] tagsOfScenario = new string[] {
-                    "mytag"};
+                    "search"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for  content related to the word card in a  1200 x 754 px", " viewport size using Google Chrome.", tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 5

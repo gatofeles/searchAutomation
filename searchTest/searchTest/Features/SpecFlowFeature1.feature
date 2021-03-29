@@ -1,7 +1,7 @@
 ﻿Feature: Search Functionality
 	Searching for content through keywords
 
-@mytag
+@search
 Scenario: Search for  content related to the word card in a  1200 x 754 px
  viewport size using Google Chrome.
 
