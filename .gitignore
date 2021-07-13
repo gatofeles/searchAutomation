@@ -1,5 +1,5 @@
 *.feature.cs
-.vs/
+seachTest/.vs/
 packages/
 bin/
 *.dll
