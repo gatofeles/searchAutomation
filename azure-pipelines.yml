@@ -21,7 +21,8 @@ steps:
 
 - task: PowerShell@2
   inputs:
-    filePath: '- task: PowerShell@2     inputs:       filePath: ''(Get-Item (Get-ItemProperty ''''HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe'''').''''(Default)'''').VersionInfo'''
+    targetType: 'inline'
+    script: '(Get-Item (Get-ItemProperty ''HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe'').''(Default)'').VersionInfo.ProductVersion'
 
 - task: NuGetCommand@2
   inputs:
