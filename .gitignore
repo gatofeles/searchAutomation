@@ -1,5 +1,5 @@
 *.feature.cs
-*/.vs
+**/[.]vs/
 packages/
 bin/
 *.dll
