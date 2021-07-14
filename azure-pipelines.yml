@@ -16,19 +16,21 @@ variables:
   driverFolder: '**/driver/'
   webdriverUrl: 'https://chromedriver.storage.googleapis.com/'
   chromedriverZip: 'chromedriver_win32.zip'
+  chromeVersion: ''
 
 
 steps:
 - task: NuGetToolInstaller@1
 
 
-- task: PowerShell@1
-  inputs:
-    $chromeVersion = '(Get-Item (Get-ItemProperty ''HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe'').''(Default)'').VersionInfo.ProductVersion
-
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: '$(chromeVersion) = ''(Get-Item (Get-ItemProperty ''''HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe'''').''''(Default)'''').VersionInfo.ProductVersion'
 
 - task: VSBuild@1
   inputs:
