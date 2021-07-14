@@ -16,7 +16,7 @@ variables:
   driverFolder: '**/driver/'
   webdriverUrl: 'https://chromedriver.storage.googleapis.com/'
   chromedriverZip: 'chromedriver_win32.zip'
-  chromeVersion: ''
+  #chromeVersion: ''
 
 
 steps:
@@ -27,10 +27,13 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- task: PowerShell@2
+-task: PowerShell@1
+  displayName: Display Environment Variables
   inputs:
-    targetType: 'inline'
-    script: '(Get-Item (Get-ItemProperty ''HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe'').''(Default)'').VersionInfo.ProductVersion'
+   scriptType: inlineScript
+   inlineScript: >-
+      $chromeVersion = '(Get-Item (Get-ItemProperty ''HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe'').''(Default)'').VersionInfo.ProductVersion
+      
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
