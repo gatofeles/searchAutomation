@@ -26,7 +26,7 @@ steps:
     targetType: 'inline'
     script: 
       $chromeVersion = '(Get-Item (Get-ItemProperty ''HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe'').''(Default)'').VersionInfo.ProductVersion
-      Invoke-WebRequest -Uri "$(webdriverUrl) - $chromeVersion - $(chromedriverZip)" -OutFile $(driverFolder)
+      #Invoke-WebRequest -Uri "$(webdriverUrl) - $chromeVersion - $(chromedriverZip)" -OutFile $(driverFolder)
       #Expand-Archive -LiteralPath "$(driverFolder) - $(chromedriverZip)" -DestinationPath $(driverFolder)
 
 - task: NuGetCommand@2
