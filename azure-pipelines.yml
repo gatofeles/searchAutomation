@@ -32,7 +32,7 @@ steps:
    scriptType: inlineScript
    inlineScript: >-
       $chromeVersion = (Get-Item (Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe').'(Default)').VersionInfo.ProductVersion;
-      $downloadUrl = $(webdriverUrl)+$chromeVersion+$(chromedriverZip);
+      $downloadUrl = "$(webdriverUrl)$chromeVersion$(chromedriverZip)";
       Write-Host "Chrome ProductVersion value: $downloadUrl"
 - task: VSBuild@1
   inputs:
