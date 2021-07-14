@@ -32,7 +32,7 @@ steps:
    scriptType: inlineScript
    inlineScript: >-
       $chromeVersion = (Get-Item (Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe').'(Default)').VersionInfo.ProductVersion
-      Write-Host "Chrome ProductVersion value: $chromeVersion"
+     
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
