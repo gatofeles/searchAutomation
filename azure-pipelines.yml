@@ -14,7 +14,8 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   driverFolder: '**/driver/'
-
+  webdriverUrl: 'https://chromedriver.storage.googleapis.com/'
+  chromedriverZip: 'chromedriver_win32.zip'
 
 
 steps:
@@ -23,7 +24,10 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: '(Get-Item (Get-ItemProperty ''HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe'').''(Default)'').VersionInfo.ProductVersion'
+    script: 
+      $chromeVersion = '(Get-Item (Get-ItemProperty ''HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe'').''(Default)'').VersionInfo.ProductVersion
+      Invoke-WebRequest -Uri "$(webdriverUrl) - $(chromeVersion) - $(chromedriverZip)" -OutFile $(driverFolder)
+      Expand-Archive -LiteralPath "$(driverFolder) - $(chromedriverZip)" -DestinationPath $(driverFolder)
 
 - task: NuGetCommand@2
   inputs:
