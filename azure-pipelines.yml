@@ -16,7 +16,7 @@ variables:
   driverFolder: 'searchTest\searchTest\webdriver'
   webdriverUrl: 'https://chromedriver.storage.googleapis.com'
   chromedriverZip: 'chromedriver_win32.zip'
-  #chromeVersion: ''
+  https: 'https://'
 
 
 steps:
@@ -34,7 +34,7 @@ steps:
    inlineScript: >-
       $chromeVersion = (Get-Item (Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe').'(Default)').VersionInfo.ProductVersion;
       $downloadUrl = "$(webdriverUrl)/$chromeVersion/$(chromedriverZip)";
-      Invoke-WebRequest -Uri "https://$downloadUrl"  -OutFile "$(Build.Repository.LocalPath)\$(driverFolder)";
+      Invoke-WebRequest -Uri "$(https)$downloadUrl"  -OutFile "$(Build.Repository.LocalPath)\$(driverFolder)";
       Write-Host "folder : $(Build.Repository.LocalPath)\$(driverFolder)";
       
 - task: VSBuild@1
