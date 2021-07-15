@@ -14,6 +14,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   driverFolder: 'searchTest\searchTest\webdriver'
+  driverFolder2: 'searchTest\searchTest\driver'
   webdriverUrl: 'https://chromedriver.storage.googleapis.com'
   chromedriverZip: 'chromedriver_win32.zip'
   https: 'https://'
@@ -38,7 +39,7 @@ steps:
       Invoke-WebRequest -Uri "$downloadUrl"  -OutFile "$(Build.Repository.LocalPath)\$(driverFolder)";
       Write-Host "Download concluído";
       Write-Host "folder : $(Build.Repository.LocalPath)\$(driverFolder)\$(chromedriverZip)";
-      Expand-Archive -Path "$(Build.Repository.LocalPath)\$(driverFolder)\$(chromedriverZip)" -DestinationPath "$(Build.Repository.LocalPath)\$(driverFolder)" -Force;
+      Expand-Archive -Path "$(Build.Repository.LocalPath)\$(driverFolder)\$(chromedriverZip)" -DestinationPath "$(Build.Repository.LocalPath)\$(driverFolder2)" -Force;
       
 - task: VSBuild@1
   inputs:
