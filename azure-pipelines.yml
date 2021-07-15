@@ -36,7 +36,7 @@ steps:
       $chromeVersion = '91.0.4472.101';
       $downloadUrl = "$(webdriverUrl)/$chromeVersion/$(chromedriverZip)";
       Write-Host "Url : $downloadUrl -- Fazendo download";
-      Invoke-WebRequest -Uri "$downloadUrl"  -OutFile "$(Build.Repository.LocalPath)\$(driverFolder)";
+      Invoke-WebRequest -Uri "$downloadUrl"  -OutFile "$(Build.Repository.LocalPath)\$(driverFolder)" -Force;
       cd "$(Build.Repository.LocalPath)";
       cd "searchTest";
       cd "searchTest";
