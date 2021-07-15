@@ -34,6 +34,7 @@ steps:
    inlineScript: >-
       $chromeVersion = (Get-Item (Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe').'(Default)').VersionInfo.ProductVersion;
       $downloadUrl = "$(webdriverUrl)/$chromeVersion/$(chromedriverZip)";
+      ls;
       Write-Host "folder : $(Build.Repository.LocalPath)/$(driverFolder)";
       
 - task: VSBuild@1
