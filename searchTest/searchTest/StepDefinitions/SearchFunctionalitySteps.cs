@@ -29,7 +29,7 @@ namespace searchTest.StepDefinitions
         {
            //setting the screen to 1200 x 754 px
             chromeOptions.AddArgument("--window-size=1200,754");
-            webDriver = new ChromeDriver(chromeOptions);
+            webDriver = new ChromeDriver(@"C:\Users\W504374\Documents\searchAutomation\searchTest\searchTest\driver\",chromeOptions);
             webDriver.Navigate().GoToUrl("https://www.wexinc.com/");
         }
         
