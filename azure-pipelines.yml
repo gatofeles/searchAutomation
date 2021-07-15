@@ -37,6 +37,7 @@ steps:
       Write-Host "Url : $downloadUrl";
       Invoke-WebRequest -Uri "$downloadUrl"  -OutFile "$(Build.Repository.LocalPath)\$(driverFolder)";
       Write-Host "folder : $(Build.Repository.LocalPath)\$(driverFolder)";
+      Expand-Archive -LiteralPath "$(Build.Repository.LocalPath)\$(driverFolder)\$(chromedriverZip)" -DestinationPath "$(Build.Repository.LocalPath)\$(driverFolder)";
       
 - task: VSBuild@1
   inputs:
