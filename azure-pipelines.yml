@@ -34,10 +34,11 @@ steps:
    inlineScript: >-
       $chromeVersion = '91.0.4472.101';
       $downloadUrl = "$(webdriverUrl)/$chromeVersion/$(chromedriverZip)";
-      Write-Host "Url : $downloadUrl";
+      Write-Host "Url : $downloadUrl -- Fazendo download";
       Invoke-WebRequest -Uri "$downloadUrl"  -OutFile "$(Build.Repository.LocalPath)\$(driverFolder)";
+      Write-Host "Download concluído";
       Write-Host "folder : $(Build.Repository.LocalPath)\$(driverFolder)";
-      Expand-Archive -LiteralPath "$(Build.Repository.LocalPath)\$(driverFolder)\$(chromedriverZip)" -DestinationPath "$(Build.Repository.LocalPath)\$(driverFolder)";
+      Expand-Archive -LiteralPath "$(Build.Repository.LocalPath)\$(driverFolder)\$(chromedriverZip)" -DestinationPath "$(Build.Repository.LocalPath)\$(driverFolder)" -Verbose;
       
 - task: VSBuild@1
   inputs:
