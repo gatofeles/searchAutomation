@@ -40,7 +40,7 @@ steps:
       cd "$(Build.Repository.LocalPath)";
       cd "searchTest";
       cd "searchTest";
-      cd "webdriver"
+      cd "webdriver";
       ls;
       Write-Host "Download concluído";
       Write-Host "folder : $(Build.Repository.LocalPath)\$(driverFolder)\$(chromedriverZip)";
