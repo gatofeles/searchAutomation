@@ -13,7 +13,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  driverFolder: '**/driver/'
+  driverFolder: ''
   webdriverUrl: 'https://chromedriver.storage.googleapis.com'
   chromedriverZip: 'chromedriver_win32.zip'
   #chromeVersion: ''
@@ -28,12 +28,13 @@ steps:
 
 - task: PowerShell@1
   displayName: Display Environment Variables
+
   inputs:
    scriptType: inlineScript
    inlineScript: >-
       $chromeVersion = (Get-Item (Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe').'(Default)').VersionInfo.ProductVersion;
       $downloadUrl = "$(webdriverUrl)/$chromeVersion/$(chromedriverZip)";
-      Write-Host "folder : $(driverFolder)"
+      Write-Host "folder : $(driverFolder) --- $(solution)"
       
 - task: VSBuild@1
   inputs:
