@@ -32,7 +32,7 @@ steps:
   inputs:
    scriptType: inlineScript
    inlineScript: >-
-      $chromeVersion = '91.0.4472.101'
+      $chromeVersion = '91.0.4472.101';
       $downloadUrl = "$(webdriverUrl)/$chromeVersion/$(chromedriverZip)";
       Write-Host "Url : $downloadUrl";
       Invoke-WebRequest -Uri "$downloadUrl"  -OutFile "$(Build.Repository.LocalPath)\$(driverFolder)";
