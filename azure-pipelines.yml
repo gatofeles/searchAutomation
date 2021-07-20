@@ -32,7 +32,7 @@ steps:
    scriptType: inlineScript
    inlineScript: >-
       $chromeVersion = (Get-Item (Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe').'(Default)').VersionInfo.ProductVersion; 
-      $chromeVersionSplit = chromeVersion -split({$_ -eq "."});
+      $chromeVersionSplit = $chromeVersion -split({$_ -eq "."});
       $chromeVersion = ($chromeVersionSplit[0..2] -join '.');
       $chromeVersion = Invoke-RestMethod -Uri "$(driverVersionUrl)$chromeVersion";
       Write-Host "$chromeVersion";
