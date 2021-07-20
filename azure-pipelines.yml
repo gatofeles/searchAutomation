@@ -14,11 +14,9 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   driverFolder: 'searchTest\searchTest\webdriver'
-  driverFolder2: 'searchTest\searchTest\driver'
+  driverVersionUrl: 'https://chromedriver.storage.googleapis.com/LATEST_RELEASE_'
   webdriverUrl: 'https://chromedriver.storage.googleapis.com'
   chromedriverZip: 'chromedriver_win32.zip'
-  https: 'https://'
-
 
 steps:
 - task: NuGetToolInstaller@1
@@ -33,7 +31,11 @@ steps:
   inputs:
    scriptType: inlineScript
    inlineScript: >-
-      $chromeVersion = '91.0.4472.101';
+      $chromeVersion = (Get-Item (Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe').'(Default)').VersionInfo.ProductVersion; 
+      $chromeVersionSplit = chromeVersion -split({$_ -eq "."});
+      $chromeVersion = ($chromeVersionSplit[0..2] -join '.');
+      $chromeVersion = Invoke-RestMethod -Uri "$(driverVersionUrl)$chromeVersion";
+      Write-Host "$chromeVersion";
       $downloadUrl = "$(webdriverUrl)/$chromeVersion/$(chromedriverZip)";
       Write-Host "Url : $downloadUrl -- Fazendo download";
       Invoke-WebRequest -Uri "$downloadUrl"  -OutFile "$(Build.Repository.LocalPath)\$(driverFolder)\$(chromedriverZip)";
