@@ -29,9 +29,9 @@ namespace searchTest.StepDefinitions
         {
             //setting the screen to 1200 x 754 px
             string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string webdriver = sCurrentDirectory + "/webdriver";
+            string webdriver = sCurrentDirectory + @"\webdriver";
             chromeOptions.AddArgument("--window-size=1200,754");
-            webDriver = new ChromeDriver(@"..\searchAutomation\searchTest\searchTest\webdriver\",chromeOptions);
+            webDriver = new ChromeDriver(webdriver,chromeOptions);
             webDriver.Navigate().GoToUrl("https://www.wexinc.com/");
         }
         
