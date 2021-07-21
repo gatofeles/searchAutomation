@@ -13,6 +13,10 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  driverFolder: 'searchTest\searchTest\webdriver'
+  driverVersionUrl: 'https://chromedriver.storage.googleapis.com/LATEST_RELEASE_'
+  webdriverUrl: 'https://chromedriver.storage.googleapis.com'
+  chromedriverZip: 'chromedriver_win32.zip'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -21,6 +25,30 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- task: PowerShell@1
+  displayName: GetWebdriver
+
+  inputs:
+   scriptType: inlineScript
+   inlineScript: >-
+      $chromeVersion = (Get-Item (Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe').'(Default)').VersionInfo.ProductVersion; 
+      $chromeVersionSplit = $chromeVersion -split({$_ -eq "."});
+      $chromeVersion = ($chromeVersionSplit[0..2] -join '.');
+      $chromeVersion = Invoke-RestMethod -Uri "$(driverVersionUrl)$chromeVersion";
+      Write-Host "$chromeVersion";
+      $downloadUrl = "$(webdriverUrl)/$chromeVersion/$(chromedriverZip)";
+      Write-Host "Url : $downloadUrl -- Fazendo download";
+      Invoke-WebRequest -Uri "$downloadUrl"  -OutFile "$(Build.Repository.LocalPath)\$(driverFolder)\$(chromedriverZip)";
+      Expand-Archive -Path "$(Build.Repository.LocalPath)\$(driverFolder)\$(chromedriverZip)" -DestinationPath "$(Build.Repository.LocalPath)\$(driverFolder)" -Force;
+      cd "$(Build.Repository.LocalPath)";
+      cd "searchTest";
+      cd "searchTest";
+      cd "webdriver";
+      ls;
+      Write-Host "Download concluído";
+      Write-Host "folder : $(Build.Repository.LocalPath)\$(driverFolder)\$(chromedriverZip)";
+      
+      
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'

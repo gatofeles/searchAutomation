@@ -1,0 +1,10 @@
+*.feature.cs
+**/[.]vs/
+packages/
+bin/
+*.dll
+*.exe
+*.xml
+*.tmp
+*.pdb
+obj/

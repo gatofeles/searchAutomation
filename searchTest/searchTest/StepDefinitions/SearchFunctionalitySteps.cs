@@ -27,9 +27,12 @@ namespace searchTest.StepDefinitions
         [Given(@"that I visit the WEX Website")]
         public void GivenThatIVisitTheWEXWebsite()
         {
-           //setting the screen to 1200 x 754 px
+            //setting the screen to 1200 x 754 px
+            string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string webdriver = System.IO.Path.Combine(sCurrentDirectory, @"..\..\webdriver");
+            
             chromeOptions.AddArgument("--window-size=1200,754");
-            webDriver = new ChromeDriver(chromeOptions);
+            webDriver = new ChromeDriver(webdriver,chromeOptions);
             webDriver.Navigate().GoToUrl("https://www.wexinc.com/");
         }
         
